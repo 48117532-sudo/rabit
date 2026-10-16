@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: modulo-cursos
+  profiles:
+    default: dev
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+    import: "configserver:http://localhost:8888"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+    import: "configserver:http://configserver:8888"
